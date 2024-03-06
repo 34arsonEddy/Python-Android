@@ -1,0 +1,223 @@
+MDScreen:
+    name:"home"        
+    MDBoxLayout:
+        orientation:"vertical"
+        MDBoxLayout:
+            orientation:"vertical"
+            adaptive_height:True
+            MDBoxLayout:
+                size_hint_y:None
+                height:dp(65)
+                AnchorLayout:
+                    anchor_y:'top'
+                    anchor_x:'left'
+                    MDIconButton:
+                        icon:"arrow-left"
+                AnchorLayout:
+                    anchor_y:'top'
+                    anchor_x:'right'
+                    MDBoxLayout:
+                        adaptive_size:True
+                        MDIconButton:
+                            icon:"magnify"
+                        MDIconButton:
+                            icon:"cart"
+                            on_release: app.sm.current = "panier"
+            MDBoxLayout:
+                size_hint_y:None
+                height:dp(55)
+                spacing:dp(12)
+                padding:dp(12)
+                
+                TabCard:
+                    icon:'tshirt-crew'
+                    text:"Vet"
+                    md_bg_color:app.theme_cls.primary_color
+                TabCard:
+                    icon:'shoe-sneaker'
+                    text:"shoe"
+                    
+                TabCard:
+                    icon:'redhat'
+                    text:"hat"
+        MDBoxLayout:
+            ScrollView:
+                id:contenu
+                MDGridLayout:
+                    id:contenuGrid
+                    cols:2
+                    padding:dp(20)
+                    spacing:dp(20)
+                    adaptive_height:True
+                    
+        # menu de navigation en bas
+        MDBoxLayout:
+            size_hint_y:None
+            md_bg_color:.9,.9,.9,1
+            height:dp(60)
+            padding:[0,0,0,15]
+            MDBoxLayout:
+                orientation:'vertical'
+                MDIconButton:
+                    pos_hint:{'center_x':.5,'center_y':.5}
+                    icon:'home'
+                    theme_text_color:'Custom'
+                    text_color:app.theme_cls.primary_color
+                    on_release: app.sm.current = "home"
+                MDLabel:
+                    text:'Home'
+                    valign:"center"
+                    theme_text_color:'Custom'
+                    text_color:app.theme_cls.primary_color
+                    halign:"center"
+            MDBoxLayout:
+                orientation:'vertical'
+                MDIconButton:
+                    pos_hint:{'center_x':.5,'center_y':.5}
+                    icon:'bell'
+                MDLabel:
+                    text:'Notification'
+                    valign:"center"
+                    halign:"center"
+            MDBoxLayout:
+                orientation:'vertical'
+                MDIconButton:
+                    pos_hint:{'center_x':.5,'center_y':.5}
+                    icon:'cards-heart'
+                MDLabel:
+                    text:'Favorite'
+                    valign:"center"
+                    halign:"center"
+            MDBoxLayout:
+                orientation:'vertical'
+                
+                MDIconButton:
+                    pos_hint:{'center_x':.5,'center_y':.5}
+                    icon:'account'
+                    on_release: app.verifcation_login() 
+                MDLabel:
+                    text:'Admin'
+                    valign:"center"
+                    halign:"center"
+                    
+
+    #modal                
+    MDBottomSheet:
+        id: bottom_sheet
+        md_bg_color: "grey"
+        adaptive_height: True
+        type:"standard"
+        on_close: content_container.clear_widgets()
+        MDBottomSheetDragHandle:
+            drag_handle_color: "grey"
+        MDBottomSheetDragHandleButton:
+            _no_ripple_effect: True
+            icon:"close"
+            text:"Annuler"
+            pos_hint: {'center_x':.5 , 'center_y': .5}
+            size_hint_x:1
+            on_release: bottom_sheet.dismiss()
+            
+            
+                
+    
+        MDBottomSheetContent:
+            id: content_container
+            padding: 0, 0, 0, "16dp"
+        
+            
+
+
+<Check@MDCheckbox>:
+    group: 'group'
+    radio_icon_normal:"checkbox-blank-circle"
+    size_hint: None, None
+    size: dp(48), dp(48)
+
+
+#contenu du Modal    
+<ContentCustomSheet@MDBoxLayout>:
+    orientation: "vertical"
+    #height:dp(750)
+    image:''
+    rate:""
+    prix:""
+    nom:""
+    id:""
+    padding:dp(12)
+    spacing:dp(20)
+
+
+    RelativeLayout:
+        ElementCard:
+            pos_hint:{"x":.05,"y":.5}
+            image:root.image
+            rate:root.rate
+            prix:root.prix
+
+    Widget:
+    MDBoxLayout:
+        spacing:dp(8)
+        MDFillRoundFlatIconButton:
+            id:ajout_panier
+            icon:"cart"
+            text:"Ajouter au panier"
+            size_hint_x:1
+            on_release:app.ajouter_panier(root.id)
+            md_bg_color:"green"
+        
+    MDRaisedButton:
+        size_hint_x:1
+        text:"Buy now"
+        md_bg_color:"green"
+
+#card dans grid        
+<ElementCard@MDCard>:
+    id:''
+    image:''
+    rate:''
+    prix:""
+    orientation:'vertical'
+    on_release:app.show_custom_bottom_sheet(root.id, root.image, root.prix, root.rate)
+    size_hint_x:.5
+    elevation:15
+    size_hint_y:None
+    md_bg_color:app.theme_cls.primary_color
+    height:dp(220)
+    padding:dp(25)
+    spacing:dp(10)
+    radius:[25]
+    MDBoxLayout:
+        height:dp(120)
+        size_hint_y:None
+        Image:
+            source:root.image
+
+    MDBoxLayout:
+        size_hint_y:None
+        height:dp(25)
+        MDIcon:
+            icon:'star'
+            theme_text_color:'Custom'
+            text_color:1,1,0,1
+            halign:"center"
+            size_hint_x:.25
+            # width:dp(30)
+        MDLabel:
+            text:root.rate
+
+    MDLabel:
+        text:f"{root.prix} Ar"
+        font_style:'H5'
+
+#menu en tete
+<TabCard@MDCard>:
+    icon:""
+    text:""
+    size_hint_y:None
+    radius:dp(15)
+    height:dp(55)
+    MDIconButton:
+        icon:root.icon
+    MDLabel:
+        text:root.text

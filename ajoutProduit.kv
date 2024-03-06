@@ -1,0 +1,91 @@
+#:import Service service.Service
+<FormProduit>:
+    name:"formProduit"
+    MDBoxLayout:
+        orientation:"vertical"
+        MDBoxLayout:
+            orientation:"vertical"
+            adaptive_height:True
+            MDBoxLayout:
+                size_hint_y:None
+                height:dp(65)
+                AnchorLayout:
+                    anchor_y:'top'
+                    anchor_x:'left'
+                    MDIconButton:
+                        icon:"arrow-left"
+                AnchorLayout:
+                    anchor_y:'top'
+                    anchor_x:'right'
+                    MDBoxLayout:
+                        adaptive_size:True
+                        MDIconButton:
+                            icon:"magnify"
+                        MDIconButton:
+                            icon:"cart"
+            MDBoxLayout:
+                size_hint_y:None
+                height:dp(55)
+                spacing:dp(12)
+                padding:dp(12)
+                
+                TabCard:
+                    icon:'tshirt-crew'
+                    text:"Vet"
+                    md_bg_color:app.theme_cls.primary_color
+                TabCard:
+                    icon:'shoe-sneaker'
+                    text:"shoe"
+                    
+                TabCard:
+                    icon:'redhat'
+                    text:"hat"
+    
+        MDBoxLayout:
+            orientation: 'vertical'
+            spacing:dp(15)
+            MDTextField:
+                id: id
+                type:"Number"
+                hint_text:"id"
+                size_hint_x:0.75
+                pos_hint: {'center_x':.5 , 'center_y':.5 }
+            MDTextField:
+                id: nom
+                hint_text:"nom du produit"
+                size_hint_x:0.75
+                pos_hint: {'center_x':.5 , 'center_y':.5 }
+            MDTextField:
+                id: prix
+                hint_text:"prix"
+                size_hint_x:0.75
+                pos_hint: {'center_x':.5 , 'center_y':.5 }
+            MDTextField:
+                id: rate
+                text: "0"
+                hint_text:"rate"
+                size_hint_x:0.75
+                pos_hint: {'center_x':.5 , 'center_y':.5 }
+            MDBoxLayout:
+                size_hint_x:0.75
+                padding:dp(10)
+                pos_hint: {'center_x': .5 }
+                MDTextField:
+                    id: pathImage
+                    hint_text:"path"
+                    size_hint_x:0.70
+                    pos_hint: {'center_x':.5 , 'center_y':.5 }
+                    
+
+                MDIconButton:        
+                    icon: "folder"
+                    pos_hint: {"x": .2, "center_y": .5}
+                    on_release:app.file_manager_open()
+
+
+            MDRaisedButton:
+                text:"Ajouter"
+                pos_hint: {'center_x':.5 , 'center_y':.5 }
+                on_release: app.ajouter_produit(id.text, nom.text, prix.text, rate.text, pathImage.text)
+                            
+                

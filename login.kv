@@ -1,0 +1,146 @@
+<Login>:
+    name:"login"        
+    MDBoxLayout:
+        orientation:"vertical"
+        MDBoxLayout:
+            orientation:"vertical"
+            adaptive_height:True
+            MDBoxLayout:
+                size_hint_y:None
+                height:dp(65)
+                AnchorLayout:
+                    anchor_y:'top'
+                    anchor_x:'left'
+                    MDIconButton:
+                        icon:"arrow-left"
+                AnchorLayout:
+                    anchor_y:'top'
+                    anchor_x:'right'
+                    MDBoxLayout:
+                        adaptive_size:True
+                        MDIconButton:
+                            icon:"magnify"
+                        MDIconButton:
+                            icon:"cart"
+                            on_release: app.sm.current = "panier"
+            MDBoxLayout:
+                size_hint_y:None
+                height:dp(55)
+                spacing:dp(12)
+                padding:dp(12)
+                
+                TabCard:
+                    icon:'tshirt-crew'
+                    text:"Vet"
+                    md_bg_color:app.theme_cls.primary_color
+                TabCard:
+                    icon:'shoe-sneaker'
+                    text:"shoe"
+                    
+                TabCard:
+                    icon:'redhat'
+                    text:"hat"
+        MDBoxLayout:
+            ScrollView:
+                id:contenu
+                MDBoxLayout:
+                    spacing:10
+                    orientation:"vertical"
+                    
+                    FitImage:
+                        source:"assets/money.jpg"
+                        adaptive_height:True
+                        height: dp(180)
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        spacing:15
+                        padding:10
+                        size_hint_y: 0.7
+                        MDTextField:
+                            id: nom
+                            hint_text:"Identifiant"
+                            size_hint_x:0.75
+                            pos_hint: {'center_x':.5 , 'center_y':.5 }
+                            
+
+                        MDTextField:
+                            id: motDePasse
+                            password:True
+                            hint_text:"mot de passe"    
+                            size_hint_x:0.75
+                            pos_hint: {'center_x':.5 , 'center_y':.5 }
+
+                    MDRaisedButton:
+                        text:"Connexion"
+                        pos_hint: {'center_x':.5 , 'center_y':.5 }
+                        on_release:app.verification_login(nom.text, motDePasse.text)
+
+                    MDBoxLayout:
+                        spacing:10
+                        padding:20
+                        adaptive_height:True
+                        height: dp(40)
+
+                        MDLabel:
+                            text: "Mot de passe oublié?"
+                            color: 'blue'  
+                            halign:"center"     
+                        MDLabel:
+                            text: "créer un compte "
+                            color: 'blue'    
+                            halign:"center"   
+                                    
+        # menu de navigation en bas
+        MDBoxLayout:
+            size_hint_y:None
+            md_bg_color:.9,.9,.9,1
+            height:dp(60)
+            padding:[0,0,0,15]
+            MDBoxLayout:
+                orientation:'vertical'
+                MDIconButton:
+                    pos_hint:{'center_x':.5,'center_y':.5}
+                    icon:'home'
+                    
+                    on_release: app.sm.current = "home"
+                MDLabel:
+                    text:'Home'
+                    valign:"center"
+                    
+                    halign:"center"
+            MDBoxLayout:
+                orientation:'vertical'
+                MDIconButton:
+                    pos_hint:{'center_x':.5,'center_y':.5}
+                    icon:'bell'
+                MDLabel:
+                    text:'Notification'
+                    valign:"center"
+                    halign:"center"
+            MDBoxLayout:
+                orientation:'vertical'
+                MDIconButton:
+                    pos_hint:{'center_x':.5,'center_y':.5}
+                    icon:'cards-heart'
+                MDLabel:
+                    text:'Favorite'
+                    valign:"center"
+                    halign:"center"
+            MDBoxLayout:
+                orientation:'vertical'
+                
+                MDIconButton:
+                    pos_hint:{'center_x':.5,'center_y':.5}
+                    icon:'account'
+                    theme_text_color:'Custom'
+                    text_color:app.theme_cls.primary_color
+                    on_release: app.sm.current = "login"
+                MDLabel:
+                    text:'admin'
+                    valign:"center"
+                    halign:"center"
+                    theme_text_color:'Custom'
+                    text_color:app.theme_cls.primary_color
+                    
+
+##############################################################

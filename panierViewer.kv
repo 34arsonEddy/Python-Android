@@ -1,0 +1,120 @@
+<PanierViewer>:
+    name:"panier"        
+    MDBoxLayout:
+        orientation:"vertical"
+        MDBoxLayout:
+            orientation:"vertical"
+            adaptive_height:True
+            MDBoxLayout:
+                size_hint_y:None
+                height:dp(65)
+                AnchorLayout:
+                    anchor_y:'top'
+                    anchor_x:'left'
+                    MDIconButton:
+                        icon:"arrow-left"
+                AnchorLayout:
+                    anchor_y:'top'
+                    anchor_x:'right'
+                    MDBoxLayout:
+                        adaptive_size:True
+                        MDIconButton:
+                            icon:"magnify"
+                        MDIconButton:
+                            icon:"cart"
+                            on_release: app.sm.current = "panier"
+            MDBoxLayout:
+                size_hint_y:None
+                height:dp(55)
+                spacing:dp(12)
+                padding:dp(12)
+                
+                TabCard:
+                    icon:'tshirt-crew'
+                    text:"Vet"
+                    md_bg_color:app.theme_cls.primary_color
+                TabCard:
+                    icon:'shoe-sneaker'
+                    text:"shoe"
+                    
+                TabCard:
+                    icon:'redhat'
+                    text:"hat"
+        MDBoxLayout:
+            ScrollView:
+                id:contenu
+                MDBoxLayout:
+                    adaptive_height:True
+                    id:box 
+                    orientation: 'vertical'
+                    spacing:dp(10)
+                    padding:dp(15)
+                    
+                    
+
+                    
+
+                    
+        # menu de navigation en bas
+        MDBoxLayout:
+            size_hint_y:None
+            md_bg_color:.9,.9,.9,1
+            height:dp(60)
+            padding:[0,0,0,15]
+            MDBoxLayout:
+                orientation:'vertical'
+                MDIconButton:
+                    pos_hint:{'center_x':.5,'center_y':.5}
+                    icon:'home'
+                    on_release: app.sm.current = "home"
+                MDLabel:
+                    text:'Home'
+                    valign:"center"
+                    halign:"center"
+            MDBoxLayout:
+                orientation:'vertical'
+                MDIconButton:
+                    pos_hint:{'center_x':.5,'center_y':.5}
+                    icon:'bell'
+                MDLabel:
+                    text:'Notification'
+                    valign:"center"
+                    halign:"center"
+            MDBoxLayout:
+                orientation:'vertical'
+                MDIconButton:
+                    pos_hint:{'center_x':.5,'center_y':.5}
+                    icon:'cards-heart'
+                MDLabel:
+                    text:'Favorite'
+                    valign:"center"
+                    halign:"center"
+            MDBoxLayout:
+                orientation:'vertical'
+                
+                MDIconButton:
+                    pos_hint:{'center_x':.5,'center_y':.5}
+                    icon:'account'
+                    on_release: app.verifcation_login() 
+                MDLabel:
+                    text:'Admin'
+                    valign:"center"
+                    halign:"center"
+
+<ListePanier@TwoLineAvatarIconListItem>:
+    id:""
+    nom:""
+    prix:''
+    image:"" 
+
+    text: root.nom
+    secondary_text: f'{root.prix} Ar'
+    IconLeftWidget:
+        icon:"delete"
+        on_release: app.supprimer_panier(root.id)
+        
+    ImageRightWidget:
+        source:root.image
+
+
+
